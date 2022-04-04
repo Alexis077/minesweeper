@@ -9,7 +9,7 @@ module Minesweeper
         def populate_board
             number_of_mines.times do
                 x, y = generate_random_coordinates_until_not_mine
-                board[x][y] = Mine.new(x, y, :hidden)
+                board[x][y] = Mine.new(x: x, y: y, state: :hidden)
             end
         end
 
