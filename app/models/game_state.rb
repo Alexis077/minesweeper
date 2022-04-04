@@ -2,6 +2,10 @@ class GameState < ApplicationRecord
     belongs_to :board
     enum state: [:playing,:resume, :lost, :won]
 
+    def total_mines
+        board.mines.count
+    end
+
     def self.create_game_state(mine_sweeper_params)
         ActiveRecord::Base.transaction do
             board = Board.create(height: mine_sweeper_params[:height], width: mine_sweeper_params[:width])
@@ -11,7 +15,7 @@ class GameState < ApplicationRecord
             Minesweeper::MineNumberGenerator.new(board_matrix).populate_board
             cells = board_matrix.flatten.each{|cell| cell.board = board}
             cells.each { |cell| cell.save! }
-            GameState.create(board: board, start_time: Time.now, face: "😀", state: "playing")
+            GameState.create(board: board, start_time: Time.now, face: "😀", state: :playing)
         end
     end
 end

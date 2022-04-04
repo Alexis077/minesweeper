@@ -2,8 +2,9 @@ module Api
     module V1
         class MineSweeperController < ApplicationController
             def start_game
-                GameState.create_game_state(mine_sweeper_params)
-                head :ok
+                game_state = GameState.create_game_state(mine_sweeper_params)
+                board_matrix = Minesweeper::GameStateRenderizer.new(game_state).render_board
+                render json: {board: board_matrix, game_state: game_state}
             end
 
 
