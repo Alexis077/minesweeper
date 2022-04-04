@@ -1,0 +1,2 @@
+class NumberCell < Cell
+end

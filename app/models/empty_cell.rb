@@ -1,0 +1,2 @@
+class EmptyCell < Cell
+end
