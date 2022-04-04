@@ -21,7 +21,12 @@ class GameState < ApplicationRecord
 
     def self.update_game_state(game_state, cell_matrix)
         ActiveRecord::Base.transaction do
-            board_matrix.flatten.each { |cell| cell.save! }
+            game_rule = Minesweeper::GameRule.new(game_state, cell_matrix)
+            Minesweeper::CellDiscover.new(cell_matrix).discover_all_mines if game_rule.game_over?
+            game_rule.game_won? if game_rule.game_won?
+            game_rule.cell_matrix.flatten.each { |cell| cell.save! if cell.changed? }
+            game_rule.game_state.save! if game_rule.game_state.changed?
+            game_state
         end
     end
 end
