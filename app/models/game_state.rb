@@ -1,6 +1,6 @@
 class GameState < ApplicationRecord
     belongs_to :board
-    enum state: [:playing,:resume, :lost, :won]
+    enum state: {playing: "playing", resume: "resume", lost: "lost", won: "won"}
 
     def total_mines
         board.mines.count
@@ -16,6 +16,12 @@ class GameState < ApplicationRecord
             cells = board_matrix.flatten.each{|cell| cell.board = board}
             cells.each { |cell| cell.save! }
             GameState.create(board: board, start_time: Time.now, face: "😀", state: :playing)
+        end
+    end
+
+    def self.update_game_state(game_state, cell_matrix)
+        ActiveRecord::Base.transaction do
+            board_matrix.flatten.each { |cell| cell.save! }
         end
     end
 end

@@ -1,15 +1,15 @@
 module Minesweeper
     class GameStateRenderizer
-        attr_accessor :game_state
-        def initialize(game_state)
-            @game_state = game_state
+        attr_accessor :cell_matrix
+        def initialize(cell_matrix)
+            @cell_matrix = cell_matrix
         end
         
         def render_board
-            build_cell_matrix.map! do |row|
+            cell_matrix.map! do |row|
                  row.map do  |cell| 
-                    next "#" if cell.state == :hidden 
-                    next "F" if cell.state == :flagged 
+                    next "#" if cell.hidden? 
+                    next "F" if cell.flagged? 
 
                     if cell.is_a?(EmptyCell)
                         "."
@@ -20,16 +20,6 @@ module Minesweeper
                     end
                 end                    
             end
-        end
-
-        private
-
-        def build_cell_matrix
-            board_matrix = game_state.board.get_board_matrix
-            game_state.board.cells.each do |cell|
-                board_matrix[cell.x][cell.y] = cell
-            end
-            board_matrix
         end
     end
 end
