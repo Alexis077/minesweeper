@@ -4,9 +4,9 @@ info:
   title: API V1
   version: v1
 paths:
-  "/api/v1/health_check":
-    get:
-      summary: list health_checks
+  "/api/v1/mine_sweeper/start_game":
+    post:
+      summary: start_game mine_sweeper
       responses:
         '200':
           description: successful
