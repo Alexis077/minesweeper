@@ -9,7 +9,8 @@ class GameState < ApplicationRecord
             Minesweeper::EmptyCellGenerator.new(board_matrix).populate_board
             Minesweeper::RandomMineGenerator.new(mine_sweeper_params[:mines], board_matrix).populate_board
             Minesweeper::MineNumberGenerator.new(board_matrix).populate_board
-            board_matrix.flatten.each(&:save)
+            cells = board_matrix.flatten.each{|cell| cell.board = board}
+            cells.each { |cell| cell.save! }
             GameState.create(board: board, start_time: Time.now, face: "😀", state: "playing")
         end
     end
