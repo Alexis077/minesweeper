@@ -8,25 +8,25 @@ module Minesweeper
 
         def populate_board
             number_of_mines.times do
-                x, y = generate_random_coordinates_until_not_mine
-                board[x][y] = Mine.new(x: x, y: y, state: :hidden)
+                y, x = generate_random_coordinates_until_not_mine
+                board[y][x] = Mine.new(y: y, x: x, state: :hidden)
             end
         end
 
         private
 
         def generate_random_coordinates
-            x = rand(0..board[0].length - 1)
             y = rand(0.. board.length - 1)
-            [x, y]
+            x = rand(0..board[0].length - 1)
+            [y, x]
         end
 
         def generate_random_coordinates_until_not_mine
-            x, y = generate_random_coordinates
-            while board[x][y].is_a?(Mine)
-                x, y = generate_random_coordinates
+            y, x = generate_random_coordinates
+            while board[y][x].is_a?(Mine)
+                y, x = generate_random_coordinates
             end
-            [x, y]
+            [y, x]
         end
     end
 end

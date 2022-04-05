@@ -6,13 +6,14 @@ module Minesweeper
             @board = board
         end
     
-        def toggle_cell_position(x, y)
-            raise StandardError.new, :invalid_position if x.negative? || y.negative? || board[x].nil? || board[x][y].nil? 
-            return board[x][y] if board[x][y].visible?
-            if board[x][y].flagged?
-                board[x][y].state = :hidden
+        def toggle_cell_position(y, x)
+            raise StandardError.new, :invalid_position if y.negative? || x.negative? || board[y].nil? || board[y][x].nil? 
+            cell = board[y][x]
+            return cell if cell.visible?
+            if cell.flagged?
+                cell.state = :hidden
             else
-                board[x][y].state = :flagged
+                cell.state = :flagged
             end 
         end
     end    

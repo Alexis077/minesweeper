@@ -7,9 +7,9 @@ module Minesweeper
         end
     
         def populate_board
-            board.each_with_index do |row, x|
-                row.each_with_index do |cell, y|
-                    board[x][y] = EmptyCell.new(x: x, y: y, state: :hidden)
+            board.each_with_index do |row, y|
+                row.each_with_index do |cell, x|
+                    board[y][x] = EmptyCell.new(y: y, x: x, state: :hidden)
                 end
             end
         end

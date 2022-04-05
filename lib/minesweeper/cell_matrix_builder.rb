@@ -9,7 +9,7 @@ module Minesweeper
         def build_cell_matrix
             board_matrix = game_state.board.get_board_matrix
             game_state.board.cells.each do |cell|
-                board_matrix[cell.x][cell.y] = cell
+                board_matrix[cell.y][cell.x] = cell
             end
             board_matrix
         end

@@ -12,14 +12,14 @@ module Api
             end
 
             def set_position 
-                Minesweeper::CellDiscover.new(@cell_matrix).discover_cell_position(position_params[:x], position_params[:y])
+                Minesweeper::CellDiscover.new(@cell_matrix).discover_cell_position(position_params[:y], position_params[:x])
                 render json: GameState.update_game_state(@game_state, @cell_matrix)
             rescue StandardError => e
                 render json: {error: e.message}, status: :bad_request
             end
 
             def toggle_flag
-                Minesweeper::CellFlag.new(@cell_matrix).toggle_cell_position(position_params[:x], position_params[:y])
+                Minesweeper::CellFlag.new(@cell_matrix).toggle_cell_position(position_params[:y], position_params[:x])
                 render json: GameState.update_game_state(@game_state, @cell_matrix)
             end
             
