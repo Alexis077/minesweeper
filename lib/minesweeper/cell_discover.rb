@@ -7,6 +7,7 @@ module Minesweeper
         end
 
         def discover_cell_position(x, y)
+            raise StandardError.new, :invalid_position if x.negative? || y.negative? || board[x].nil? || board[x][y].nil? 
             return board[x][y] if board[x][y].flagged? && board[x][y].visible? 
             discover_cell(x, y)
             discover_sorrounding_cells(x, y) unless board[x][y].is_a?(NumberCell) || board[x][y].is_a?(Mine)

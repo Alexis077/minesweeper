@@ -8,7 +8,7 @@ Rails.application.routes.draw do
         collection do
           post :start_game
           post 'set_position/:game_state_id', to: 'mine_sweeper#set_position'
-          post 'set_flag/:game_state_id', to: 'mine_sweeper#set_flag'
+          post 'toggle_flag/:game_state_id', to: 'mine_sweeper#toggle_flag'
           get 'game_board/:game_state_id', to: 'mine_sweeper#game_board'
         end
       end
