@@ -93,6 +93,8 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
     }
 
     patch('set_position mine_sweeper') do
+      tags 'Set new position'
+      consumes 'application/json'
       response(200, 'successful') do
         examples 'application/json' => {
           "id": 59,
@@ -134,6 +136,9 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
     }
 
     patch('toggle_flag mine_sweeper') do
+      tags 'Add or remove flag'
+      consumes 'application/json'
+
       response(200, 'successful') do
         examples 'application/json' => {
           "id": 59,

@@ -72,6 +72,8 @@ paths:
             y: 1
     patch:
       summary: set_position mine_sweeper
+      tags:
+      - Set new position
       responses:
         '200':
           description: successful
@@ -114,6 +116,8 @@ paths:
             y: 2
     patch:
       summary: toggle_flag mine_sweeper
+      tags:
+      - Add or remove flag
       responses:
         '200':
           description: successful
