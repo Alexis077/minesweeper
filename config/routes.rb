@@ -7,8 +7,8 @@ Rails.application.routes.draw do
       resources :mine_sweeper, only: [:start_game, :set_position, :set_flag, :game_board] do
         collection do
           post :start_game
-          post 'set_position/:game_state_id', to: 'mine_sweeper#set_position'
-          post 'toggle_flag/:game_state_id', to: 'mine_sweeper#toggle_flag'
+          patch 'set_position/:game_state_id', to: 'mine_sweeper#set_position'
+          patch 'toggle_flag/:game_state_id', to: 'mine_sweeper#toggle_flag'
           get 'game_board/:game_state_id', to: 'mine_sweeper#game_board'
         end
       end

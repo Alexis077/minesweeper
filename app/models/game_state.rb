@@ -3,11 +3,14 @@ class GameState < ApplicationRecord
     enum state: {playing: "playing", resume: "resume", lost: "lost", won: "won"}
 
     def total_mines
-        board.mines.count
+        board.cells.where(type: "Mine").count
     end
 
     def self.create_game_state(mine_sweeper_params)
         ActiveRecord::Base.transaction do
+            raise StandardError.new, :zero_mines if mine_sweeper_params[:mines].zero?
+            raise StandardError.new, :zero_height if mine_sweeper_params[:height].zero?
+            raise StandardError.new, :zero_width if mine_sweeper_params[:width].zero?
             raise StandardError.new, :invalid_mine_count if mine_sweeper_params[:mines] > mine_sweeper_params[:height] * mine_sweeper_params[:width]
             board = Board.create(height: mine_sweeper_params[:height], width: mine_sweeper_params[:width])
             board_matrix = board.get_board_matrix
