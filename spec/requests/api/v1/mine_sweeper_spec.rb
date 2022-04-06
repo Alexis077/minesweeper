@@ -77,13 +77,18 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
     parameter name: :position, in: :body, schema: {
       type: :object,
       properties: {
-        x: { type: :integer },
-        y: { type: :integer }
+        position: {
+          x: { type: :integer },
+          y: { type: :integer }
+        }
+        
       },
-      required: [ 'x', 'y' ],
+      required: [ 'position'],
       example: {
-        x: 2,
-        y: 1,
+        position:{
+          x: 2,
+          y: 1
+        }
       }
     }
 
@@ -114,13 +119,17 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
     parameter name: :position, in: :body, schema: {
       type: :object,
       properties: {
-        x: { type: :integer },
-        y: { type: :integer }
+        position: {
+          x: { type: :integer },
+          y: { type: :integer }
+        }
       },
-      required: [ 'x', 'y' ],
+      required: [ 'position'],
       example: {
-        x: 2,
-        y: 1,
+        position:{
+          x: 2,
+          y: 2
+        }
       }
     }
 
