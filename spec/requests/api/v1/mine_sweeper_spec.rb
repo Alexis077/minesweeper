@@ -74,27 +74,29 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
   path '/api/v1/mine_sweeper/set_position/{game_state_id}' do
     # You'll want to customize the parameter types...
     parameter name: 'game_state_id', in: :path, type: :string, description: 'game_state_id'
-    parameter name: :position, in: :body, schema: {
-      type: :object,
-      properties: {
-        position: {
-          x: { type: :integer },
-          y: { type: :integer }
-        }
-        
-      },
-      required: [ 'position'],
-      example: {
-        position:{
-          x: 2,
-          y: 1
-        }
-      }
-    }
-
+    
     patch('set_position mine_sweeper') do
+      
       tags 'Set new position'
       consumes 'application/json'
+      parameter name: :position, in: :body, schema: {
+        type: :object,
+        properties: {
+          position: {
+            x: { type: :integer },
+            y: { type: :integer }
+          }
+          
+        },
+        required: [ 'position'],
+        example: {
+          position:{
+            x: 2,
+            y: 1
+          }
+        }
+      }
+
       response(200, 'successful') do
         examples 'application/json' => {
           "id": 59,
@@ -118,27 +120,27 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
   path '/api/v1/mine_sweeper/toggle_flag/{game_state_id}' do
     # You'll want to customize the parameter types...
     parameter name: 'game_state_id', in: :path, type: :string, description: 'game_state_id'
-    parameter name: :position, in: :body, schema: {
-      type: :object,
-      properties: {
-        position: {
-          x: { type: :integer },
-          y: { type: :integer }
-        }
-      },
-      required: [ 'position'],
-      example: {
-        position:{
-          x: 2,
-          y: 2
-        }
-      }
-    }
 
     patch('toggle_flag mine_sweeper') do
       tags 'Add or remove flag'
       consumes 'application/json'
-
+      parameter name: :position, in: :body, schema: {
+        type: :object,
+        properties: {
+          position: {
+            x: { type: :integer },
+            y: { type: :integer }
+          }
+        },
+        required: [ 'position'],
+        example: {
+          position:{
+            x: 2,
+            y: 2
+          }
+        }
+      }
+  
       response(200, 'successful') do
         examples 'application/json' => {
           "id": 59,

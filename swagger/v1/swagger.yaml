@@ -54,26 +54,11 @@ paths:
       required: true
       schema:
         type: string
-    - name: position
-      in: body
-      schema:
-        type: object
-        properties:
-          position:
-            x:
-              type: integer
-            y:
-              type: integer
-        required:
-        - position
-        example:
-          position:
-            x: 2
-            y: 1
     patch:
       summary: set_position mine_sweeper
       tags:
       - Set new position
+      parameters: []
       responses:
         '200':
           description: successful
@@ -90,6 +75,23 @@ paths:
             application/json:
               example:
                 error: invalid_position
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                position:
+                  x:
+                    type: integer
+                  y:
+                    type: integer
+              required:
+              - position
+              example:
+                position:
+                  x: 2
+                  y: 1
   "/api/v1/mine_sweeper/toggle_flag/{game_state_id}":
     parameters:
     - name: game_state_id
@@ -98,26 +100,11 @@ paths:
       required: true
       schema:
         type: string
-    - name: position
-      in: body
-      schema:
-        type: object
-        properties:
-          position:
-            x:
-              type: integer
-            y:
-              type: integer
-        required:
-        - position
-        example:
-          position:
-            x: 2
-            y: 2
     patch:
       summary: toggle_flag mine_sweeper
       tags:
       - Add or remove flag
+      parameters: []
       responses:
         '200':
           description: successful
@@ -134,6 +121,23 @@ paths:
             application/json:
               example:
                 error: invalid_position
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                position:
+                  x:
+                    type: integer
+                  y:
+                    type: integer
+              required:
+              - position
+              example:
+                position:
+                  x: 2
+                  y: 2
   "/api/v1/mine_sweeper/game_board/{game_state_id}":
     parameters:
     - name: game_state_id
