@@ -7,9 +7,45 @@ paths:
   "/api/v1/mine_sweeper/start_game":
     post:
       summary: start_game mine_sweeper
+      tags:
+      - MineSweeper
+      parameters: []
       responses:
         '200':
-          description: successful
+          description: Game started
+          content:
+            application/json:
+              example:
+                id: 59
+                start_time: '2022-04-06T06:26:30.784Z'
+                state: playing
+                face: "\U0001F600"
+        '400':
+          description: invalid mine count
+          content:
+            application/json:
+              example:
+                error: invalid_mine_count
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                height:
+                  type: integer
+                width:
+                  type: integer
+                mines:
+                  type: integer
+              required:
+              - height
+              - width
+              - mines
+              example:
+                height: 8
+                width: 8
+                mines: 10
   "/api/v1/mine_sweeper/set_position/{game_state_id}":
     parameters:
     - name: game_state_id
@@ -18,11 +54,39 @@ paths:
       required: true
       schema:
         type: string
-    post:
+    - name: position
+      in: body
+      schema:
+        type: object
+        properties:
+          x:
+            type: integer
+          y:
+            type: integer
+        required:
+        - x
+        - y
+        example:
+          x: 2
+          y: 1
+    patch:
       summary: set_position mine_sweeper
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              example:
+                id: 59
+                start_time: '2022-04-06T06:26:30.784Z'
+                state: playing
+                face: "\U0001F600"
+        '400':
+          description: Invalid position
+          content:
+            application/json:
+              example:
+                error: invalid_position
   "/api/v1/mine_sweeper/toggle_flag/{game_state_id}":
     parameters:
     - name: game_state_id
@@ -31,11 +95,39 @@ paths:
       required: true
       schema:
         type: string
-    post:
+    - name: position
+      in: body
+      schema:
+        type: object
+        properties:
+          x:
+            type: integer
+          y:
+            type: integer
+        required:
+        - x
+        - y
+        example:
+          x: 2
+          y: 1
+    patch:
       summary: toggle_flag mine_sweeper
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              example:
+                id: 59
+                start_time: '2022-04-06T06:26:30.784Z'
+                state: playing
+                face: "\U0001F600"
+        '400':
+          description: Invalid position
+          content:
+            application/json:
+              example:
+                error: invalid_position
   "/api/v1/mine_sweeper/game_board/{game_state_id}":
     parameters:
     - name: game_state_id
@@ -49,6 +141,85 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              example:
+                board:
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - '1'
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - '1'
+                  - '1'
+                  - '3'
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - '1'
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - '1'
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - '1'
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - '1'
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - '2'
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - '1'
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                game_state:
+                  id: 59
+                  start_time: '2022-04-06T06:26:30.784Z'
+                  state: playing
+                  face: "\U0001F600"
+        '400':
+          description: Invalid position
+          content:
+            application/json:
+              example:
+                error: Couldn't find GameState with 'id'=222
 servers:
 - url: https://{defaultHost}
   variables:
