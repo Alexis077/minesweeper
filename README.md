@@ -1,24 +1,35 @@
-# README
+# Code Trial
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## Description 
 
-* Ruby version
+This game is an api rest version of the popular minesweeper game
 
-* System dependencies
+## Requirements
 
-* Configuration
+* Ruby 2.7.x 
+* Rails 6.0.x 
+* Postgresql
+ 
+## Project development
 
-* Database creation
+To carry out this project was to start with the development of the logic of the game.
+the game logic was adapted from a console execution environment to a mode adapted to the nature of a REST API.
+## Relevant points of logic to highlight
+the minesweeper game has particular characteristics that must be considered
 
-* Database initialization
+* Generation of the game matrix
+* Generation of empty cells, mines cells
+* Logic generation for the number generation logic around the mines
+* Logic to reveal neighboring empty cells
 
-* How to run the test suite
+## Other considerations
 
-* Services (job queues, cache servers, search engines, etc.)
+* Rwsag was implemented
+* Data representation by serializers
 
-* Deployment instructions
+## Access the documentation
+https://minesweeper-trial.herokuapp.com/api-docs/index.html
+## Start Game
 
-* ...
+
