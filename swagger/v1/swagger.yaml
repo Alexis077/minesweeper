@@ -16,10 +16,75 @@ paths:
           content:
             application/json:
               example:
-                id: 59
-                start_time: '2022-04-06T06:26:30.784Z'
+                id: 68
+                start_time: '2022-04-07T01:21:13.903Z'
                 state: playing
                 face: "\U0001F600"
+                board:
+                - - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
         '400':
           description: invalid mine count
           content:
@@ -65,10 +130,75 @@ paths:
           content:
             application/json:
               example:
-                id: 59
-                start_time: '2022-04-06T06:26:30.784Z'
+                id: 68
+                start_time: '2022-04-07T01:21:13.903Z'
                 state: playing
                 face: "\U0001F600"
+                board:
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - '1'
+                  - '1'
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - "\U0001F7EA"
+                  - '2'
+                  - '1'
+                  - '1'
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - '1'
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - '1'
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
         '400':
           description: Invalid position
           content:
@@ -90,7 +220,7 @@ paths:
               - position
               example:
                 position:
-                  x: 2
+                  x: 0
                   y: 1
   "/api/v1/mine_sweeper/toggle_flag/{game_state_id}":
     parameters:
@@ -111,10 +241,75 @@ paths:
           content:
             application/json:
               example:
-                id: 59
-                start_time: '2022-04-06T06:26:30.784Z'
+                id: 68
+                start_time: '2022-04-07T01:21:13.903Z'
                 state: playing
                 face: "\U0001F600"
+                board:
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - '1'
+                  - '1'
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - "\U0001F7EA"
+                  - '2'
+                  - '1'
+                  - '1'
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - '1'
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - "\U0001F6A9"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - '1'
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
         '400':
           description: Invalid position
           content:
@@ -136,8 +331,8 @@ paths:
               - position
               example:
                 position:
-                  x: 2
-                  y: 2
+                  x: 0
+                  y: 7
   "/api/v1/mine_sweeper/game_board/{game_state_id}":
     parameters:
     - name: game_state_id
@@ -154,76 +349,75 @@ paths:
           content:
             application/json:
               example:
+                id: 68
+                start_time: '2022-04-07T01:21:13.903Z'
+                state: playing
+                face: "\U0001F600"
                 board:
                 - - "\U0001F7E9"
                   - "\U0001F7E9"
-                  - '1'
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                - - "\U0001F7E9"
                   - "\U0001F7E9"
-                  - '1'
-                  - '1'
-                  - '3'
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
                 - - "\U0001F7E9"
                   - "\U0001F7E9"
                   - "\U0001F7E9"
                   - "\U0001F7E9"
-                  - '1'
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
                 - - "\U0001F7E9"
                   - "\U0001F7E9"
                   - "\U0001F7E9"
                   - "\U0001F7E9"
-                  - '1'
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
                 - - "\U0001F7E9"
                   - "\U0001F7E9"
                   - "\U0001F7E9"
                   - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - '1'
                   - '1'
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                - - "\U0001F7E9"
                   - "\U0001F7E9"
                   - "\U0001F7E9"
                   - "\U0001F7E9"
-                  - '1'
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                - - "\U0001F7E9"
                   - "\U0001F7E9"
                   - "\U0001F7E9"
                   - "\U0001F7E9"
+                - - "\U0001F7EA"
                   - '2'
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                - - "\U0001F7E9"
-                  - "\U0001F7E9"
-                  - "\U0001F7E9"
-                  - "\U0001F7E9"
                   - '1'
+                  - '1'
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - "\U0001F7EA"
                   - "\U0001F7EA"
                   - "\U0001F7EA"
+                  - '1'
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                - - "\U0001F6A9"
                   - "\U0001F7EA"
-                game_state:
-                  id: 59
-                  start_time: '2022-04-06T06:26:30.784Z'
-                  state: playing
-                  face: "\U0001F600"
+                  - "\U0001F7EA"
+                  - '1'
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
+                  - "\U0001F7E9"
         '400':
           description: Invalid position
           content:
