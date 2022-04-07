@@ -23,10 +23,8 @@ module Api
                 render json: GameState.update_game_state(@game_state, @cell_matrix)
             end
             
-
             def game_board
-                board_matrix_with_cells = Minesweeper::GameStateRenderizer.new(@cell_matrix).render_board
-                render json: {board: board_matrix_with_cells, game_state: @game_state}
+                render json: @game_state
             end
 
             private

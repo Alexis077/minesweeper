@@ -8,7 +8,7 @@ paths:
     post:
       summary: start_game mine_sweeper
       tags:
-      - MineSweeper
+      - Start Game
       parameters: []
       responses:
         '200':

@@ -6,7 +6,7 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
 
     post('start_game mine_sweeper') do
       
-      tags 'MineSweeper'
+      tags 'Start Game'
       consumes 'application/json'
 
       parameter name: :mine_sweeper, in: :body, schema: {

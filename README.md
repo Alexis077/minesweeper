@@ -25,11 +25,14 @@ the minesweeper game has particular characteristics that must be considered
 
 ## Other considerations
 
-* Rwsag was implemented
+* Rwsag implemented
 * Data representation by serializers
 
-## Access the documentation
-https://minesweeper-trial.herokuapp.com/api-docs/index.html
-## Start Game
+## Access to the Api documentation
 
+To see the definition of the Api go to the following url
+
+```
+POST http://<hostname>/api-docs/index.html
+```
 
