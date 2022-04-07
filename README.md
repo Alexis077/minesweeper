@@ -19,8 +19,8 @@ the game logic was adapted from a console execution environment to a mode adapte
 the minesweeper game has particular characteristics that must be considered
 
 * Generation of the game matrix
-* Generation of empty cells, mines cells
-* Logic generation for the number generation logic around the mines
+* Generation of empty cells, mine cells
+* Logic generation for the number generation around the mines
 * Logic to reveal neighboring empty cells
 
 ## Other considerations
