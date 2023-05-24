@@ -20,12 +20,15 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
   end
 
   after do |example|
-    content = example.metadata[:response][:content] || {}
-    example_spec = {
-      "application/json"=> { example: JSON.parse(response.body, symbolize_names: true)}
-      
+    example.metadata[:response][:content] = {
+      'application/json' => {
+        examples: {
+          example.metadata[:example_group][:description] => {
+            value: JSON.parse(response.body, symbolize_names: true)
+          }
+        }
+      }
     }
-    example.metadata[:response][:content] = content.deep_merge(example_spec)
   end
 
   path '/api/v1/mine_sweeper/start_game' do
@@ -58,35 +61,38 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
         end
       end
 
-      response(400, 'zero mines') do
-        let(:mine_sweeper) { { height: 8, width: 8, mines: 0 } }
-        run_test! do |response|
-          data = JSON.parse(response.body)
-          expect(data['error']).to eq('zero_mines')
-        end
-      end
+      response(400, 'Error') do
 
-      response(400, 'zero height') do
-        let(:mine_sweeper) { { height: 0, width: 8, mines: 10 } }
-        run_test! do |response|
-          data = JSON.parse(response.body)
-          expect(data['error']).to eq('zero_height')
+        context "zero mines" do
+          let(:mine_sweeper) { { height: 8, width: 8, mines: 0 } }
+          run_test! do |response|
+            data = JSON.parse(response.body)
+            expect(data['error']).to eq('zero_mines')
+          end
         end
-      end
-
-      response(400, 'zero width') do
-        let(:mine_sweeper) { { height: 8, width: 0, mines: 10 } }
-        run_test! do |response|
-          data = JSON.parse(response.body)
-          expect(data['error']).to eq('zero_width')
+      
+        context "zero height" do
+          let(:mine_sweeper) { { height: 0, width: 8, mines: 10 } }
+          run_test! do |response|
+            data = JSON.parse(response.body)
+            expect(data['error']).to eq('zero_height')
+          end
         end
-      end
 
-      response(400, 'invalid mine count') do
-        let(:mine_sweeper) { { height: 8, width: 8, mines: 65 } }
-        run_test! do |response|
-          data = JSON.parse(response.body)
-          expect(data['error']).to eq('invalid_mine_count')
+        context "zero width" do
+          let(:mine_sweeper) { { height: 8, width: 0, mines: 10 } }
+          run_test! do |response|
+            data = JSON.parse(response.body)
+            expect(data['error']).to eq('zero_width')
+          end
+        end
+
+        context "invalid mine count" do
+          let(:mine_sweeper) { { height: 8, width: 8, mines: 65 } }
+          run_test! do |response|
+            data = JSON.parse(response.body)
+            expect(data['error']).to eq('invalid_mine_count')
+          end
         end
       end
     end
@@ -120,26 +126,31 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
       }
 
       response(200, 'successful') do
-        let(:position) {{position: { x: 0, y: 1 }}}        
-        run_test! do |response|
-          data = JSON.parse(response.body)
-          expect(data['state']).to eq('playing')
+        context "Discover a common cell" do
+          let(:position) {{position: { x: 0, y: 1 }}}        
+          run_test! do |response|
+            data = JSON.parse(response.body)
+            expect(data['state']).to eq('playing')
+          end
+        end
+
+        context "Game over" do
+          let(:position) {{position: { x: 0, y: 0 }}}
+          run_test! do |response|
+            data = JSON.parse(response.body)
+            expect(data['state']).to eq('lost')
+          end
         end
       end
 
-      response(200, 'Game lost') do
-        let(:position) {{position: { x: 0, y: 0 }}}
-        run_test! do |response|
-          data = JSON.parse(response.body)
-          expect(data['state']).to eq('lost')
-        end
-      end
 
-      response(400, 'Invalid position') do
-        let(:position) {{position: { x: -1, y: 0 }}}
-        run_test! do |response|
-          data = JSON.parse(response.body)
-          expect(data['error']).to eq('invalid_position')
+      response(400, 'Error') do
+        context "Invalid position" do
+          let(:position) {{position: { x: -1, y: 0 }}}
+          run_test! do |response|
+            data = JSON.parse(response.body)
+            expect(data['error']).to eq('invalid_position')
+          end
         end
       end
     end
@@ -172,18 +183,22 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
       }
   
       response(200, 'successful') do
-        let(:position) {{position: { x: 1, y: 1 }}}
-        run_test! do |response|
-          data = JSON.parse(response.body)
-          expect(data['state']).to eq('playing')
+        context "Set Flag" do
+          let(:position) {{position: { x: 1, y: 1 }}}
+          run_test! do |response|
+            data = JSON.parse(response.body)
+            expect(data['state']).to eq('playing')
+          end
         end
       end
 
-      response(400, 'Invalid position') do
-        let(:position) {{position: { x: 9, y: 9 }}}
-        run_test! do |response|
-          data = JSON.parse(response.body)
-          expect(data['error']).to eq('invalid_position')
+      response(400, 'Error') do
+        context "Invalid position to set flag" do
+          let(:position) {{position: { x: 9, y: 9 }}}
+          run_test! do |response|
+            data = JSON.parse(response.body)
+            expect(data['error']).to eq('invalid_position')
+          end
         end
       end
     end
@@ -197,17 +212,21 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
       let(:game_state_id) { GameState.create_game_state(10, 8, 8).id }
 
       response(200, 'successful') do
-        run_test! do |response|
-          data = JSON.parse(response.body)
-          expect(data['state']).to eq('playing')
+        context "Find game" do
+          run_test! do |response|
+            data = JSON.parse(response.body)
+            expect(data['state']).to eq('playing')
+          end
         end
       end
 
-      response(400, 'not found') do
-        let(:game_state_id) { 1000 }
-        run_test! do |response|
-          data = JSON.parse(response.body)
-          expect(data['error']).to eq("Couldn't find GameState with 'id'=1000")
+      response(400, 'Error') do
+        context "Game not found" do
+          let(:game_state_id) { 1000 }
+          run_test! do |response|
+            data = JSON.parse(response.body)
+            expect(data['error']).to eq("Couldn't find GameState with 'id'=1000")
+          end
         end
       end
     end
