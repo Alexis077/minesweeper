@@ -127,6 +127,14 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
         end
       end
 
+      response(200, 'Game lost') do
+        let(:position) {{position: { x: 0, y: 0 }}}
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data['state']).to eq('lost')
+        end
+      end
+
       response(400, 'Invalid position') do
         let(:position) {{position: { x: -1, y: 0 }}}
         run_test! do |response|

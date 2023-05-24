@@ -17,7 +17,7 @@ paths:
             application/json:
               example:
                 id: 1
-                start_time: '2023-05-24T06:17:26.647Z'
+                start_time: '2023-05-24T06:51:13.403Z'
                 state: playing
                 face: "\U0001F600"
                 board:
@@ -126,24 +126,16 @@ paths:
       parameters: []
       responses:
         '200':
-          description: successful
+          description: Game lost
           content:
             application/json:
               example:
                 id: 1
-                start_time: '2023-05-24T06:17:26.702Z'
-                state: playing
-                face: "\U0001F600"
+                start_time: '2023-05-24T06:51:13.501Z'
+                state: lost
+                face: "\U0001F635"
                 board:
-                - - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                  - "\U0001F7EA"
-                - - '1'
+                - - "\U0001F4A3"
                   - "\U0001F7EA"
                   - "\U0001F7EA"
                   - "\U0001F7EA"
@@ -153,7 +145,7 @@ paths:
                   - "\U0001F7EA"
                 - - "\U0001F7EA"
                   - "\U0001F7EA"
-                  - "\U0001F7EA"
+                  - "\U0001F4A3"
                   - "\U0001F7EA"
                   - "\U0001F7EA"
                   - "\U0001F7EA"
@@ -164,6 +156,14 @@ paths:
                   - "\U0001F7EA"
                   - "\U0001F7EA"
                   - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                - - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F7EA"
+                  - "\U0001F4A3"
                   - "\U0001F7EA"
                   - "\U0001F7EA"
                   - "\U0001F7EA"
@@ -242,7 +242,7 @@ paths:
             application/json:
               example:
                 id: 1
-                start_time: '2023-05-24T06:17:26.786Z'
+                start_time: '2023-05-24T06:51:13.579Z'
                 state: playing
                 face: "\U0001F600"
                 board:
@@ -350,7 +350,7 @@ paths:
             application/json:
               example:
                 id: 1
-                start_time: '2023-05-24T06:17:26.864Z'
+                start_time: '2023-05-24T06:51:13.683Z'
                 state: playing
                 face: "\U0001F600"
                 board:
