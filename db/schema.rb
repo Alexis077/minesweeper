@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2022_04_04_025538) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "boards", force: :cascade do |t|
     t.integer "height", default: 0
     t.integer "width", default: 0
@@ -23,7 +20,7 @@ ActiveRecord::Schema.define(version: 2022_04_04_025538) do
   end
 
   create_table "cells", force: :cascade do |t|
-    t.bigint "board_id", null: false
+    t.integer "board_id", null: false
     t.integer "x"
     t.integer "y"
     t.string "state"
@@ -35,7 +32,7 @@ ActiveRecord::Schema.define(version: 2022_04_04_025538) do
   end
 
   create_table "game_states", force: :cascade do |t|
-    t.bigint "board_id", null: false
+    t.integer "board_id", null: false
     t.datetime "start_time"
     t.string "face"
     t.string "state"

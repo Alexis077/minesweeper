@@ -7,15 +7,11 @@ module Api
             
             def start_game
                 render json: GameState.create_game_state(mine_sweeper_params)
-            rescue StandardError => e
-                render json: {error: e.message}, status: :bad_request
             end
 
             def set_position 
                 Minesweeper::CellDiscover.new(@cell_matrix).discover_cell_position(position_params[:y], position_params[:x])
                 render json: GameState.update_game_state(@game_state, @cell_matrix)
-            rescue StandardError => e
-                render json: {error: e.message}, status: :bad_request
             end
 
             def toggle_flag
