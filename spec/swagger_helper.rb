@@ -24,12 +24,10 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'https://{defaultHost}',
-          variables: {
-            defaultHost: {
-              default: 'minesweeper-trial.herokuapp.com'
-            }
-          }
+          url: "https://#{Socket.getaddrinfo(Socket.gethostname, nil)[0][2]}"
+        },
+        {
+          url: "http://localhost:3000"
         }
       ]
     }

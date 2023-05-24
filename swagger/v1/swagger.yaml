@@ -19,7 +19,7 @@ paths:
                 Game started:
                   value:
                     id: 1
-                    start_time: '2023-05-24T07:40:30.980Z'
+                    start_time: '2023-05-24T07:48:02.476Z'
                     state: playing
                     face: "\U0001F600"
                     board:
@@ -146,7 +146,7 @@ paths:
                 Discover a common cell:
                   value:
                     id: 1
-                    start_time: '2023-05-24T07:40:31.039Z'
+                    start_time: '2023-05-24T07:48:02.539Z'
                     state: playing
                     face: "\U0001F600"
                     board:
@@ -217,7 +217,7 @@ paths:
                 Game over:
                   value:
                     id: 1
-                    start_time: '2023-05-24T07:40:31.080Z'
+                    start_time: '2023-05-24T07:48:02.579Z'
                     state: lost
                     face: "\U0001F635"
                     board:
@@ -332,7 +332,7 @@ paths:
                 Set Flag:
                   value:
                     id: 1
-                    start_time: '2023-05-24T07:40:31.165Z'
+                    start_time: '2023-05-24T07:48:02.661Z'
                     state: playing
                     face: "\U0001F600"
                     board:
@@ -444,7 +444,7 @@ paths:
                 Find game:
                   value:
                     id: 1
-                    start_time: '2023-05-24T07:40:31.278Z'
+                    start_time: '2023-05-24T07:48:02.759Z'
                     state: playing
                     face: "\U0001F600"
                     board:
@@ -521,7 +521,5 @@ paths:
                   value:
                     error: Couldn't find GameState with 'id'=1000
 servers:
-- url: https://{defaultHost}
-  variables:
-    defaultHost:
-      default: minesweeper-trial.herokuapp.com
+- url: https://127.0.1.1
+- url: http://localhost:3000
