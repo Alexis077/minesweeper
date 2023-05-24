@@ -60,7 +60,6 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
         }
       }
       
-
       response(200, 'Game started') do
         let(:mine_sweeper) { { height: 8, width: 8, mines: 2 } }
         run_test!
@@ -93,7 +92,8 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
     parameter name: 'game_state_id', in: :path, type: :string, description: 'game_state_id'
     
     patch('set_position mine_sweeper') do
-      
+      let!(:game_state_id) { GameState.create_game_state(10, 8, 8).id }
+
       tags 'Set new position'
       consumes 'application/json'
       parameter name: :position, in: :body, schema: {
@@ -115,13 +115,11 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
       }
 
       response(200, 'successful') do
-        let(:game_state_id) { GameState.create_game_state(10, 8, 8).id }
         let(:position) {{position: { x: 0, y: 1 }}}        
         run_test!
       end
 
       response(400, 'Invalid position') do
-        let(:game_state_id) { GameState.create_game_state(10, 8, 8).id }
         let(:position) {{position: { x: -1, y: 0 }}}
         run_test!
       end
@@ -133,6 +131,8 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
     parameter name: 'game_state_id', in: :path, type: :string, description: 'game_state_id'
 
     patch('toggle_flag mine_sweeper') do
+      let!(:game_state_id) { GameState.create_game_state(10, 8, 8).id }
+
       tags 'Add or remove flag'
       consumes 'application/json'
       parameter name: :position, in: :body, schema: {
@@ -153,13 +153,11 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
       }
   
       response(200, 'successful') do
-        let(:game_state_id) { GameState.create_game_state(10, 8, 8).id }
         let(:position) {{position: { x: 1, y: 1 }}}
         run_test!
       end
 
       response(400, 'Invalid position') do
-        let(:game_state_id) { GameState.create_game_state(10, 8, 8).id }
         let(:position) {{position: { x: 9, y: 9 }}}
         run_test!
       end
@@ -171,8 +169,9 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
     parameter name: 'game_state_id', in: :path, type: :string, description: 'game_state_id'
 
     get('game_board mine_sweeper') do
+      let(:game_state_id) { GameState.create_game_state(10, 8, 8).id }
+
       response(200, 'successful') do
-        let(:game_state_id) { GameState.create_game_state(10, 8, 8).id }
         run_test!
       end
 
