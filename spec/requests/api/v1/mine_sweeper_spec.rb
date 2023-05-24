@@ -2,6 +2,42 @@ require 'swagger_helper'
 
 RSpec.describe 'api/v1/mine_sweeper', type: :request do
 
+  before do
+    allow_any_instance_of(Minesweeper::RandomMineGenerator).to receive(:populate_board) do |generator|
+      # Define las posiciones de las minas
+      mine_positions = [
+        [0, 0],
+        [1, 2],
+        [3, 4],
+        # Agrega más posiciones si es necesario
+      ]
+
+      mine_positions.each do |position|
+        y, x = position
+        generator.board[y][x] = Mine.new(y: y, x: x, state: :hidden)
+      end
+    end
+  end
+
+  after do |example|
+    content = example.metadata[:response][:content] || {}
+    example_spec = {
+      "application/json"=> { example: JSON.parse(response.body, symbolize_names: true)}
+      
+    }
+    example.metadata[:response][:content] = content.deep_merge(example_spec)
+  end
+
+  def set_examples
+    after do |example|
+      content = example.metadata[:response][:content] || {}
+      example_spec = {
+        "application/json" => { example: JSON.parse(response.body, symbolize_names: true) }
+      }
+      example.metadata[:response][:content] = content.deep_merge(example_spec)
+    end
+  end
+
   path '/api/v1/mine_sweeper/start_game' do
 
     post('start_game mine_sweeper') do
@@ -27,55 +63,26 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
 
       response(200, 'Game started') do
         let(:mine_sweeper) { { height: 8, width: 8, mines: 2 } }
-        examples 'application/json' => {
-          "id": 68,
-          "start_time": "2022-04-07T01:21:13.903Z",
-          "state": "playing",
-          "face": "😀",
-              "board": [
-                  ["🟪","🟪","🟪","🟪","🟪","🟪","🟪","🟪"],
-                  ["🟪","🟪","🟪","🟪","🟪","🟪","🟪","🟪"],
-                  ["🟪","🟪","🟪","🟪","🟪","🟪","🟪","🟪"],
-                  ["🟪","🟪","🟪","🟪","🟪","🟪","🟪","🟪"],
-                  ["🟪","🟪","🟪","🟪","🟪","🟪","🟪","🟪"],
-                  ["🟪","🟪","🟪","🟪","🟪","🟪","🟪","🟪"],
-                  ["🟪","🟪","🟪","🟪","🟪","🟪","🟪","🟪"],
-                  ["🟪","🟪","🟪","🟪","🟪","🟪","🟪","🟪"]
-              ]
-        }
-      
         run_test!
       end
 
       response(400, 'zero mines') do
         let(:mine_sweeper) { { height: 8, width: 8, mines: 0 } }
-        examples 'application/json' => {
-          "error": "zero_mines"
-        }
         run_test!
       end
 
       response(400, 'zero height') do
         let(:mine_sweeper) { { height: 0, width: 8, mines: 10 } }
-        examples 'application/json' => {
-          "error": "zero_height"
-        }
         run_test!
       end
 
       response(400, 'zero width') do
         let(:mine_sweeper) { { height: 8, width: 0, mines: 10 } }
-        examples 'application/json' => {
-          "error": "zero_width"
-        }
         run_test!
       end
 
       response(400, 'invalid mine count') do
         let(:mine_sweeper) { { height: 8, width: 8, mines: 65 } }
-        examples 'application/json' => {
-          "error": "invalid_mine_count"
-        }
         run_test!
       end
     end
@@ -108,30 +115,14 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
       }
 
       response(200, 'successful') do
-        examples 'application/json' => {
-          "id": 68,
-          "start_time": "2022-04-07T01:21:13.903Z",
-          "state": "playing",
-          "face": "😀",
-          "board": [
-              ["🟩","🟩","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["🟩","🟩","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["🟩","🟩","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["🟩","🟩","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["1","1","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["🟪","2","1","1","🟩","🟩","🟩","🟩"],
-              ["🟪","🟪","🟪","1","🟩","🟩","🟩","🟩"],
-              ["🟪","🟪","🟪","1","🟩","🟩","🟩","🟩"]
-          ]
-      }
+        let(:game_state_id) { GameState.create_game_state(10, 8, 8).id }
+        let(:position) {{position: { x: 0, y: 1 }}}        
         run_test!
       end
 
       response(400, 'Invalid position') do
-
-        examples 'application/json' => {
-          "error": "invalid_position"
-        }
+        let(:game_state_id) { GameState.create_game_state(10, 8, 8).id }
+        let(:position) {{position: { x: -1, y: 0 }}}
         run_test!
       end
     end
@@ -162,30 +153,14 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
       }
   
       response(200, 'successful') do
-        examples 'application/json' => {
-          "id": 68,
-          "start_time": "2022-04-07T01:21:13.903Z",
-          "state": "playing",
-          "face": "😀",
-          "board": [
-              ["🟩","🟩","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["🟩","🟩","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["🟩","🟩","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["🟩","🟩","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["1","1","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["🟪","2","1","1","🟩","🟩","🟩","🟩"],
-              ["🟪","🟪","🟪","1","🟩","🟩","🟩","🟩"],
-              ["🚩","🟪","🟪","1","🟩","🟩","🟩","🟩"]
-          ]
-        }
+        let(:game_state_id) { GameState.create_game_state(10, 8, 8).id }
+        let(:position) {{position: { x: 1, y: 1 }}}
         run_test!
       end
 
       response(400, 'Invalid position') do
-
-        examples 'application/json' => {
-          "error": "invalid_position"
-        }
+        let(:game_state_id) { GameState.create_game_state(10, 8, 8).id }
+        let(:position) {{position: { x: 9, y: 9 }}}
         run_test!
       end
     end
@@ -197,30 +172,12 @@ RSpec.describe 'api/v1/mine_sweeper', type: :request do
 
     get('game_board mine_sweeper') do
       response(200, 'successful') do
-        examples 'application/json' => {
-          "id": 68,
-          "start_time": "2022-04-07T01:21:13.903Z",
-          "state": "playing",
-          "face": "😀",
-          "board": [
-              ["🟩","🟩","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["🟩","🟩","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["🟩","🟩","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["🟩","🟩","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["1","1","🟩","🟩","🟩","🟩","🟩","🟩"],
-              ["🟪","2","1","1","🟩","🟩","🟩","🟩"],
-              ["🟪","🟪","🟪","1","🟩","🟩","🟩","🟩"],
-              ["🚩","🟪","🟪","1","🟩","🟩","🟩","🟩"]
-          ]
-        }
+        let(:game_state_id) { GameState.create_game_state(10, 8, 8).id }
         run_test!
       end
 
-      response(400, 'Invalid position') do
-
-        examples 'application/json' => {
-          "error": "Couldn't find GameState with 'id'=222"
-        }
+      response(400, 'not found') do
+        let(:game_state_id) { 1000 }
         run_test!
       end
     end

@@ -6,7 +6,9 @@ module Api
             before_action :validate_game_state, only: [:set_position, :toggle_flag]
             
             def start_game
-                render json: GameState.create_game_state(mine_sweeper_params)
+                render json: GameState.create_game_state(mine_sweeper_params[:mines],
+                                                         mine_sweeper_params[:height],
+                                                         mine_sweeper_params[:width])
             end
 
             def set_position 
