@@ -9,7 +9,6 @@ This game is an api rest version of the popular minesweeper game
 
 * Ruby 2.7.x 
 * Rails 6.0.x 
-* Postgresql
  
 ## Project development
 
